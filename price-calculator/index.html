@@ -1,0 +1,367 @@
+<!-- ============================================================
+     Nauci Dizajn — WEB DESIGN PRICE CALCULATOR (Webflow Embed Code)
+     Full self-contained embed. Fontovi Raptor Text / Saol Standard su vec u Webflow projektu.
+     ADMIN: menjaj SAMO config blok (NDCALC) na vrhu <script>-a. Ispod ne diraj.
+     ============================================================ -->
+<div id="nd-calc">
+<style>
+#nd-calc{--nd-bela:#FFFFFF;--nd-body-on-dark:#D3D3D3;--nd-border-on-dark:rgba(255,255,255,0.14);--nd-dur:180ms;--nd-ease:cubic-bezier(0.22,1,0.36,1);--nd-fluo:#DBFF00;--nd-font-sans:"Raptor Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--nd-font-serif:"Saol Standard",Georgia,"Times New Roman",serif;--nd-maslina-100:#797D73;--nd-maslina-200:#3D403C;--nd-maslina-300:#313330;--nd-maslina-400:#232421;--nd-on-accent:#232421;--nd-radius-md:8px;--nd-radius-lg:12px;--nd-radius-pill:999px;--nd-radius-xl:24px;--nd-surface-dark:#232421;margin:0;color:var(--nd-bela);font-family:var(--nd-font-sans);line-height:1.4;background:var(--nd-surface-dark)}
+#nd-calc *,#nd-calc *::before,#nd-calc *::after{box-sizing:border-box}
+#nd-calc h1,#nd-calc h2,#nd-calc h3,#nd-calc p{margin:0}
+#nd-calc .ndc-wrap{max-width:1120px;margin:0 auto;padding:clamp(40px,8vw,72px) 24px clamp(56px,10vw,88px)}
+#nd-calc .ndc-eyebrow{font-weight:600;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:var(--nd-maslina-100)}
+#nd-calc .ndc-h1{margin-top:14px;font-family:var(--nd-font-sans);font-weight:500;font-size:clamp(30px,6.5vw,46px);line-height:1.08;letter-spacing:-0.03em;color:var(--nd-bela)}
+#nd-calc .ndc-h1 em{font-family:var(--nd-font-serif);font-style:italic;color:var(--nd-fluo)}
+#nd-calc .ndc-intro{margin-top:16px;max-width:620px;font-size:clamp(15px,3.6vw,17px);line-height:1.55;color:var(--nd-body-on-dark)}
+#nd-calc .ndc-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:clamp(32px,5vw,44px)}
+@media(min-width:900px){#nd-calc .ndc-grid{grid-template-columns:1.15fr 0.85fr;gap:32px;align-items:start}}
+/* steps */
+#nd-calc .ndc-step{background:var(--nd-maslina-300);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-xl);padding:clamp(20px,4vw,28px);margin-bottom:20px}
+#nd-calc .ndc-step:last-child{margin-bottom:0}
+#nd-calc .ndc-step-h{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+#nd-calc .ndc-step-n{flex-shrink:0;width:28px;height:28px;border-radius:var(--nd-radius-pill);background:var(--nd-fluo);color:var(--nd-maslina-400);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+#nd-calc .ndc-step-t{font-weight:600;font-size:18px;letter-spacing:-0.01em;color:var(--nd-bela)}
+#nd-calc .ndc-step-sub{margin:-8px 0 18px 40px;font-size:14px;color:var(--nd-maslina-100)}
+/* controls */
+#nd-calc select,#nd-calc .ndc-select{width:100%;appearance:none;-webkit-appearance:none;background:var(--nd-maslina-400);color:var(--nd-bela);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-md);padding:14px 40px 14px 14px;font-family:var(--nd-font-sans);font-size:15px;font-weight:500;cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%23DBFF00' stroke-width='2' stroke-linecap='round'><path d='M3 5l4 4 4-4'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
+#nd-calc select:focus,#nd-calc .ndc-select:focus{outline:none;border-color:var(--nd-fluo)}
+#nd-calc .ndc-addons{display:flex;flex-direction:column;gap:10px}
+#nd-calc .ndc-addon{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+#nd-calc .ndc-addon-main{display:flex;align-items:center;gap:12px;min-width:200px;flex:1 1 200px}
+#nd-calc .ndc-addon-label{font-size:15px;font-weight:500;color:var(--nd-bela)}
+#nd-calc .ndc-addon-ctrl{flex:1 1 180px;min-width:150px;display:flex;justify-content:flex-end}
+#nd-calc .ndc-addon-ctrl .ndc-selwrap{width:100%;max-width:230px}
+/* toggle switch */
+#nd-calc .ndc-toggle{position:relative;flex-shrink:0;width:46px;height:27px;border-radius:var(--nd-radius-pill);background:var(--nd-maslina-400);border:1px solid var(--nd-border-on-dark);cursor:pointer;transition:background var(--nd-dur) var(--nd-ease),border-color var(--nd-dur) var(--nd-ease)}
+#nd-calc .ndc-toggle::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:var(--nd-radius-pill);background:var(--nd-maslina-100);transition:transform var(--nd-dur) var(--nd-ease),background var(--nd-dur) var(--nd-ease)}
+#nd-calc .ndc-toggle.on{background:var(--nd-fluo);border-color:var(--nd-fluo)}
+#nd-calc .ndc-toggle.on::after{transform:translateX(19px);background:var(--nd-maslina-400)}
+#nd-calc .ndc-addon-price{font-size:13px;font-weight:600;color:var(--nd-maslina-100);min-width:52px;text-align:right;white-space:nowrap}
+#nd-calc .ndc-addon.active .ndc-addon-price{color:var(--nd-fluo)}
+#nd-calc .ndc-hr{height:1px;background:var(--nd-border-on-dark);border:0;margin:4px 0}
+/* deadline pills */
+#nd-calc .ndc-deadlines{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+#nd-calc .ndc-pill{padding:14px 12px;border-radius:var(--nd-radius-md);background:var(--nd-maslina-400);border:1px solid var(--nd-border-on-dark);color:var(--nd-body-on-dark);font-family:var(--nd-font-sans);font-weight:600;font-size:15px;cursor:pointer;text-align:center;transition:all var(--nd-dur) var(--nd-ease)}
+#nd-calc .ndc-pill small{display:block;margin-top:3px;font-weight:500;font-size:12px;color:var(--nd-maslina-100)}
+#nd-calc .ndc-pill.on{background:var(--nd-fluo);border-color:var(--nd-fluo);color:var(--nd-maslina-400)}
+#nd-calc .ndc-pill.on small{color:var(--nd-maslina-400);opacity:.7}
+/* result */
+#nd-calc .ndc-result{position:sticky;top:20px}
+#nd-calc .ndc-tiers{display:flex;flex-direction:column;gap:12px}
+#nd-calc .ndc-tier{border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-lg);padding:18px 20px;background:var(--nd-maslina-300)}
+#nd-calc .ndc-tier-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+#nd-calc .ndc-tier-name{font-size:13px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--nd-maslina-100)}
+#nd-calc .ndc-tier-val{font-weight:500;font-size:clamp(24px,5vw,30px);letter-spacing:-0.02em;color:var(--nd-bela);font-variant-numeric:tabular-nums}
+#nd-calc .ndc-tier-note{margin-top:8px;font-size:13px;line-height:1.5;color:var(--nd-body-on-dark)}
+#nd-calc .ndc-tier--rec{background:var(--nd-maslina-400);border-color:var(--nd-fluo)}
+#nd-calc .ndc-tier--rec .ndc-tier-name{color:var(--nd-fluo)}
+#nd-calc .ndc-tier--rec .ndc-tier-val{font-size:clamp(30px,7vw,42px)}
+#nd-calc .ndc-breakdown{margin-top:18px;background:var(--nd-surface-dark);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-lg);padding:18px 20px}
+#nd-calc .ndc-breakdown-h{font-size:13px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;color:var(--nd-maslina-100);margin-bottom:12px}
+#nd-calc .ndc-bd-item{display:flex;gap:10px;font-size:14px;line-height:1.5;color:var(--nd-body-on-dark);padding:6px 0}
+#nd-calc .ndc-bd-item + .ndc-bd-item{border-top:1px solid var(--nd-border-on-dark)}
+#nd-calc .ndc-bd-plus{flex-shrink:0;font-weight:600;color:var(--nd-fluo);font-variant-numeric:tabular-nums}
+#nd-calc .ndc-bd-item strong{color:var(--nd-bela);font-weight:600}
+#nd-calc .ndc-bottom{margin-top:18px;padding:18px 20px;border-radius:var(--nd-radius-lg);background:var(--nd-fluo);color:var(--nd-maslina-400);font-weight:600;font-size:15px;line-height:1.5}
+</style>
+
+<div class="ndc-wrap">
+  <div class="ndc-eyebrow">Kalkulator cene</div>
+  <h1 class="ndc-h1">Koliko <em>vredi</em> sajt koji praviš?</h1>
+  <p class="ndc-intro">Ne naplaćuješ sate - naplaćuješ vrednost koju klijent dobija. Izaberi tip biznisa, dodatke i rok, pa vidi fer cenu.</p>
+
+  <div class="ndc-grid">
+    <div class="ndc-inputs">
+
+      <div class="ndc-step">
+        <div class="ndc-step-h"><span class="ndc-step-n">1</span><span class="ndc-step-t">Tip biznisa</span></div>
+        <div class="ndc-step-sub">Glavni faktor - određuje baznu vrednost.</div>
+        <div class="ndc-selwrap"><select id="ndc-business"></select></div>
+      </div>
+
+      <div class="ndc-step">
+        <div class="ndc-step-h"><span class="ndc-step-n">2</span><span class="ndc-step-t">Dodaci</span></div>
+        <div class="ndc-step-sub">Svaki dodatak diže cenu po tome šta donosi klijentu.</div>
+        <div class="ndc-addons" id="ndc-addons"></div>
+      </div>
+
+      <div class="ndc-step">
+        <div class="ndc-step-h"><span class="ndc-step-n">3</span><span class="ndc-step-t">Rok</span></div>
+        <div class="ndc-step-sub">Kraći rok množi finalnu cenu.</div>
+        <div class="ndc-deadlines" id="ndc-deadlines"></div>
+      </div>
+
+    </div>
+
+    <div class="ndc-result" id="ndc-result"></div>
+  </div>
+</div>
+
+<script>
+/* ═════════════════════════ CONFIG ═════════════════════════
+   ADMIN: menjaj SAMO ovaj NDCALC objekat (cene, dodaci, množioci, tekstovi).
+   Ispod „KRAJ CONFIG-a" je logika - NE diraj je.
+   ─────────────────────────────────────────────────────────── */
+var NDCALC = {
+  floor: 500,              // minimalni pod - cena nikad ispod ovoga
+  minimumFactor: 0.65,     // Minimum = max(floor, Preporuceno × ovo)
+  premiumFactor: 1.15,     // Premium = Preporuceno × ovo
+  roundTo: 10,             // zaokruzi cene na najblizih X €
+
+  // Korak 1 - bazne cene po tipu biznisa
+  businesses: [
+    { id:"stomatolog", label:"Stomatolog",              base:1100 },
+    { id:"klinika",    label:"Privatna klinika",         base:1200 },
+    { id:"glamping",   label:"Glamping",                 base:1150 },
+    { id:"restoran",   label:"Restoran",                 base:950  },
+    { id:"salon",      label:"Salon (frizerski/kozmetički)", base:900 },
+    { id:"autoskola",  label:"Auto škola",               base:850  },
+    { id:"pekara",     label:"Pekara / mali lokal",      base:700  }
+  ],
+
+  // Korak 2 - dodaci. type:"toggle" (da/ne) ili type:"select" (padajuci meni).
+  // "why" = recenica koju pocetnik moze da procita klijentu.
+  addons: [
+    { id:"rezervacije", type:"toggle", label:"Rezervacioni sistem", price:200,
+      why:"jer klijent dobija termine dok spava" },
+
+    { id:"dvojezicni", type:"toggle", label:"Dvojezičan sajt", price:150,
+      why:"jer otvara vrata gostima iz inostranstva" },
+
+    { id:"seo", type:"select", label:"SEO", default:"ne", options:[
+      { id:"ne",       label:"Bez SEO-a",     price:0 },
+      { id:"osnovni",  label:"Osnovni SEO",   price:100, why:"da ga Google uopšte primeti" },
+      { id:"napredni", label:"Napredni SEO",  price:250, why:"da ga nalaze ljudi koji već traže tu uslugu" }
+    ]},
+
+    { id:"blog", type:"toggle", label:"Blog / CMS", price:150,
+      why:"da klijent sam dodaje objave i raste na Google-u" },
+
+    { id:"logo", type:"select", label:"Logo", default:"ne", options:[
+      { id:"ne",      label:"Klijent ima logo",        price:0 },
+      { id:"refresh", label:"Osvežavanje postojećeg",  price:80,  why:"da izgleda ozbiljno, ne amaterski" },
+      { id:"nov",     label:"Nov logo",                price:200, why:"jer dobija prepoznatljiv brend od nule" }
+    ]},
+
+    { id:"copy", type:"select", label:"Tekstovi", default:"klijent", options:[
+      { id:"klijent", label:"Klijent daje tekst",            price:0 },
+      { id:"ai",      label:"AI prilagođava klijentov tekst", price:100, why:"da tekst prodaje, ne samo opisuje" },
+      { id:"nov",     label:"Pišem nov tekst",               price:200, why:"jer prazna stranica postaje ubedljiva ponuda" }
+    ]},
+
+    { id:"foto", type:"select", label:"Fotografije", default:"klijent", options:[
+      { id:"klijent", label:"Klijent daje fotke",     price:0 },
+      { id:"stock",   label:"Stock fotografije",      price:50,  why:"da sajt izgleda profesionalno" },
+      { id:"ai",      label:"AI generisane fotke",    price:100, why:"jedinstvene slike bez skupog fotografa" }
+    ]},
+
+    { id:"stranice", type:"select", label:"Dodatne stranice (preko bazne)", default:"0", options:[
+      { id:"0", label:"Bez dodatnih", price:0 },
+      { id:"1", label:"+1 stranica",  price:60,  why:"više sadržaja i posla" },
+      { id:"2", label:"+2 stranice",  price:120, why:"više sadržaja i posla" },
+      { id:"3", label:"+3 stranice",  price:180, why:"više sadržaja i posla" },
+      { id:"5", label:"+5 stranica",  price:300, why:"više sadržaja i posla" }
+    ]},
+
+    { id:"forma", type:"toggle", label:"Napredna kontakt forma", price:80,
+      why:"da upiti stižu sređeni, spremni za odgovor" },
+
+    { id:"animacije", type:"select", label:"Animacije", default:"bez", options:[
+      { id:"bez",      label:"Bez animacija",     price:0 },
+      { id:"osnovne",  label:"Osnovne animacije", price:80,  why:"da sajt deluje živo i skupo" },
+      { id:"napredne", label:"Napredne animacije",price:180, why:"da ostavi „vau\" utisak na prvi pogled" }
+    ]},
+
+    { id:"revizije", type:"select", label:"Revizije", default:"2", options:[
+      { id:"2",     label:"2 revizije (uključeno)", price:0 },
+      { id:"4",     label:"4 revizije",             price:100, why:"više prostora za doradu" },
+      { id:"neogr", label:"Neograničene revizije",  price:250, why:"jer klijent kupuje mir, a ti naplaćuješ strpljenje" }
+    ]},
+
+    { id:"hosting", type:"toggle", label:"Hosting i održavanje (godišnje)", price:150,
+      why:"da sajt radi, a ti imaš prihod koji se ponavlja" }
+  ],
+
+  // Korak 3 - rok mnozi finalnu cenu
+  deadlines: [
+    { id:"flex", label:"Fleksibilan", mult:1    },
+    { id:"14",   label:"14 dana",     mult:1.1  },
+    { id:"7",    label:"7 dana",      mult:1.25 },
+    { id:"3",    label:"3 dana",      mult:1.4  }
+  ],
+
+  // Tekstovi
+  copy: {
+    minimumName:  "Minimum",
+    recName:      "Preporučeno",
+    premiumName:  "Premium",
+    minimumNote:  "Cena za tvoj prvi ili drugi projekat dok skupljaš reference. Ne ostaj ovde dugo.",
+    recNote:      "Fer cena za ovaj projekat.",
+    premiumNote:  "Kad imaš samopouzdanje i klijenta koji ima para.",
+    breakdownH:   "Zašto tolika cena",
+    baseLabel:    "Bazna vrednost",
+    deadlineLabel:"Rok",
+    bottomNote:   "Ovaj sajt praviš za par sati, a klijentu vredi {rec}. Ta razlika je razlog zašto ovo radiš."
+  }
+};
+/* ═════════════════════════ KRAJ CONFIG-a — ispod ne diraj ═════════════════════════ */
+
+(function(){
+  var root = document.getElementById("nd-calc");
+  if(!root) return;
+  var C = NDCALC;
+  var roundTo = C.roundTo || 1;
+  function rnd(n){ return Math.round(n / roundTo) * roundTo; }
+  function fmt(n){ return Math.round(n).toLocaleString("de-DE") + " €"; }
+
+  // state
+  var state = { business: C.businesses[0].id, addons: {}, deadline: C.deadlines[0].id };
+  C.addons.forEach(function(a){
+    state.addons[a.id] = (a.type === "toggle") ? false : (a.default != null ? a.default : a.options[0].id);
+  });
+
+  // ---- build inputs ----
+  var selBiz = document.getElementById("ndc-business");
+  selBiz.innerHTML = C.businesses.map(function(b){
+    return '<option value="'+b.id+'">'+b.label+' — '+fmt(b.base)+'</option>';
+  }).join("");
+  selBiz.value = state.business;
+  selBiz.addEventListener("change", function(){ state.business = selBiz.value; calc(); });
+
+  var addWrap = document.getElementById("ndc-addons");
+  C.addons.forEach(function(a, i){
+    var row = document.createElement("div");
+    row.className = "ndc-addon";
+    row.setAttribute("data-id", a.id);
+
+    var main = document.createElement("div");
+    main.className = "ndc-addon-main";
+    main.innerHTML = '<span class="ndc-addon-label">'+a.label+'</span>';
+
+    var ctrl = document.createElement("div");
+    ctrl.className = "ndc-addon-ctrl";
+
+    if(a.type === "toggle"){
+      var price = document.createElement("span");
+      price.className = "ndc-addon-price";
+      price.textContent = "+" + fmt(a.price);
+      var tog = document.createElement("div");
+      tog.className = "ndc-toggle";
+      tog.setAttribute("role","switch");
+      tog.addEventListener("click", function(){
+        state.addons[a.id] = !state.addons[a.id];
+        tog.classList.toggle("on", state.addons[a.id]);
+        row.classList.toggle("active", state.addons[a.id]);
+        calc();
+      });
+      ctrl.appendChild(price);
+      ctrl.appendChild(tog);
+    } else {
+      var sw = document.createElement("div");
+      sw.className = "ndc-selwrap";
+      var sel = document.createElement("select");
+      sel.innerHTML = a.options.map(function(o){
+        var suffix = o.price > 0 ? "  (+"+fmt(o.price)+")" : "";
+        return '<option value="'+o.id+'">'+o.label+suffix+'</option>';
+      }).join("");
+      sel.value = state.addons[a.id];
+      sel.addEventListener("change", function(){
+        state.addons[a.id] = sel.value;
+        var op = a.options.filter(function(o){return o.id===sel.value;})[0];
+        row.classList.toggle("active", !!(op && op.price>0));
+        calc();
+      });
+      sw.appendChild(sel);
+      ctrl.appendChild(sw);
+    }
+
+    row.appendChild(main);
+    row.appendChild(ctrl);
+    addWrap.appendChild(row);
+
+    if(i < C.addons.length - 1){
+      var hr = document.createElement("hr");
+      hr.className = "ndc-hr";
+      addWrap.appendChild(hr);
+    }
+  });
+
+  var dlWrap = document.getElementById("ndc-deadlines");
+  C.deadlines.forEach(function(d){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "ndc-pill" + (d.id === state.deadline ? " on" : "");
+    b.setAttribute("data-id", d.id);
+    b.innerHTML = d.label + '<small>×' + d.mult + '</small>';
+    b.addEventListener("click", function(){
+      state.deadline = d.id;
+      [].slice.call(dlWrap.children).forEach(function(x){ x.classList.toggle("on", x.getAttribute("data-id")===d.id); });
+      calc();
+    });
+    dlWrap.appendChild(b);
+  });
+
+  // ---- calc + render result ----
+  var out = document.getElementById("ndc-result");
+  function calc(){
+    var biz = C.businesses.filter(function(b){return b.id===state.business;})[0];
+    var base = biz.base;
+    var lines = [];
+    lines.push({ label: C.copy.baseLabel + " ("+biz.label+")", amount: base, why: "", isBase:true });
+
+    var addonsTotal = 0;
+    C.addons.forEach(function(a){
+      if(a.type === "toggle"){
+        if(state.addons[a.id]){
+          addonsTotal += a.price;
+          lines.push({ label: a.label, amount: a.price, why: a.why || "" });
+        }
+      } else {
+        var op = a.options.filter(function(o){return o.id===state.addons[a.id];})[0];
+        if(op && op.price > 0){
+          addonsTotal += op.price;
+          lines.push({ label: a.label + ": " + op.label.replace(/\s*\(.*\)$/,""), amount: op.price, why: op.why || "" });
+        }
+      }
+    });
+
+    var subtotal = base + addonsTotal;
+    var dl = C.deadlines.filter(function(d){return d.id===state.deadline;})[0];
+    var recommended = rnd(subtotal * dl.mult);
+    var premium = rnd(recommended * C.premiumFactor);
+    var minimum = Math.max(C.floor, rnd(recommended * C.minimumFactor));
+
+    var tiers =
+      '<div class="ndc-tiers">' +
+        tier(C.copy.minimumName, minimum, C.copy.minimumNote, false) +
+        tier(C.copy.recName, recommended, C.copy.recNote, true) +
+        tier(C.copy.premiumName, premium, C.copy.premiumNote, false) +
+      '</div>';
+
+    var bd = '<div class="ndc-breakdown"><div class="ndc-breakdown-h">'+C.copy.breakdownH+'</div>';
+    lines.forEach(function(l){
+      var amt = (l.isBase ? "" : "+") + fmt(l.amount);
+      var why = l.why ? " " + l.why : "";
+      bd += '<div class="ndc-bd-item"><span class="ndc-bd-plus">'+amt+'</span><span><strong>'+l.label+'</strong>'+(why?" — "+why.replace(/^ /,""):"")+'</span></div>';
+    });
+    if(dl.mult !== 1){
+      bd += '<div class="ndc-bd-item"><span class="ndc-bd-plus">×'+dl.mult+'</span><span><strong>'+C.copy.deadlineLabel+': '+dl.label+'</strong> — hitno vredi više</span></div>';
+    }
+    bd += '</div>';
+
+    var bottom = '<div class="ndc-bottom">'+ C.copy.bottomNote.replace("{rec}", fmt(recommended)) +'</div>';
+
+    out.innerHTML = tiers + bd + bottom;
+  }
+
+  function tier(name, val, note, isRec){
+    return '<div class="ndc-tier'+(isRec?' ndc-tier--rec':'')+'">' +
+      '<div class="ndc-tier-top"><span class="ndc-tier-name">'+name+'</span><span class="ndc-tier-val">'+fmt(val)+'</span></div>' +
+      (note ? '<div class="ndc-tier-note">'+note+'</div>' : '') +
+    '</div>';
+  }
+
+  calc();
+})();
+</script>
+</div>
