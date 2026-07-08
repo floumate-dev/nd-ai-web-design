@@ -1,10 +1,11 @@
 <!-- ============================================================
-     Nauci Dizajn — WEB DESIGN PRICE CALCULATOR (Webflow Embed Code)
+     Nauci Dizajn - WEB DESIGN PRICE CALCULATOR (Webflow Embed Code)
      Full self-contained embed. Fontovi Raptor Text / Saol Standard su vec u Webflow projektu.
      ADMIN: menjaj SAMO config blok (NDCALC) na vrhu <script>-a. Ispod ne diraj.
      ============================================================ -->
 <div id="nd-calc">
 <style>
+html,body{margin:0;padding:0;background:#232421}
 #nd-calc{--nd-bela:#FFFFFF;--nd-body-on-dark:#D3D3D3;--nd-border-on-dark:rgba(255,255,255,0.14);--nd-dur:180ms;--nd-ease:cubic-bezier(0.22,1,0.36,1);--nd-fluo:#DBFF00;--nd-font-sans:"Raptor Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--nd-font-serif:"Saol Standard",Georgia,"Times New Roman",serif;--nd-maslina-100:#797D73;--nd-maslina-200:#3D403C;--nd-maslina-300:#313330;--nd-maslina-400:#232421;--nd-on-accent:#232421;--nd-radius-md:8px;--nd-radius-lg:12px;--nd-radius-pill:999px;--nd-radius-xl:24px;--nd-surface-dark:#232421;margin:0;color:var(--nd-bela);font-family:var(--nd-font-sans);line-height:1.4;background:var(--nd-surface-dark)}
 #nd-calc *,#nd-calc *::before,#nd-calc *::after{box-sizing:border-box}
 #nd-calc h1,#nd-calc h2,#nd-calc h3,#nd-calc p{margin:0}
@@ -29,8 +30,23 @@
 #nd-calc .ndc-addon{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 #nd-calc .ndc-addon-main{display:flex;align-items:center;gap:12px;min-width:200px;flex:1 1 200px}
 #nd-calc .ndc-addon-label{font-size:15px;font-weight:500;color:var(--nd-bela)}
-#nd-calc .ndc-addon-ctrl{flex:1 1 180px;min-width:150px;display:flex;justify-content:flex-end}
-#nd-calc .ndc-addon-ctrl .ndc-selwrap{width:100%;max-width:230px}
+#nd-calc .ndc-addon-ctrl{flex:1 1 230px;min-width:150px;display:flex;justify-content:flex-end;align-items:center;gap:16px}
+/* custom dropdown */
+#nd-calc .ndc-dd{position:relative;display:inline-block;max-width:100%}
+#nd-calc .ndc-dd--full{display:block;width:100%}
+#nd-calc .ndc-dd-btn{display:inline-flex;align-items:center;gap:10px;width:auto;max-width:100%;background:var(--nd-maslina-400);color:var(--nd-bela);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-md);padding:12px 14px;font-family:var(--nd-font-sans);font-size:15px;font-weight:500;line-height:1.2;cursor:pointer;transition:border-color var(--nd-dur) var(--nd-ease)}
+#nd-calc .ndc-dd--full .ndc-dd-btn{width:100%;justify-content:space-between}
+#nd-calc .ndc-dd-btn:hover{border-color:var(--nd-maslina-100)}
+#nd-calc .ndc-dd.open .ndc-dd-btn{border-color:var(--nd-fluo)}
+#nd-calc .ndc-dd-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#nd-calc .ndc-dd-arrow{flex-shrink:0;width:14px;height:14px;color:var(--nd-fluo);transition:transform var(--nd-dur) var(--nd-ease)}
+#nd-calc .ndc-dd.open .ndc-dd-arrow{transform:rotate(180deg)}
+#nd-calc .ndc-dd-panel{position:absolute;top:calc(100% + 6px);right:0;min-width:100%;width:max-content;max-width:min(340px,82vw);z-index:40;background:var(--nd-maslina-300);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-md);padding:6px;box-shadow:0 14px 36px rgba(0,0,0,0.45);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity var(--nd-dur) var(--nd-ease),transform var(--nd-dur) var(--nd-ease),visibility var(--nd-dur)}
+#nd-calc .ndc-dd--full .ndc-dd-panel{left:0;right:0;width:auto;max-width:none}
+#nd-calc .ndc-dd.open .ndc-dd-panel{opacity:1;visibility:visible;transform:translateY(0)}
+#nd-calc .ndc-dd-opt{padding:11px 13px;border-radius:6px;font-size:14px;line-height:1.35;color:var(--nd-body-on-dark);cursor:pointer;white-space:nowrap;transition:background var(--nd-dur) var(--nd-ease),color var(--nd-dur) var(--nd-ease)}
+#nd-calc .ndc-dd-opt:hover{background:var(--nd-maslina-200);color:var(--nd-bela)}
+#nd-calc .ndc-dd-opt.sel{color:var(--nd-fluo);font-weight:600}
 /* toggle switch */
 #nd-calc .ndc-toggle{position:relative;flex-shrink:0;width:46px;height:27px;border-radius:var(--nd-radius-pill);background:var(--nd-maslina-400);border:1px solid var(--nd-border-on-dark);cursor:pointer;transition:background var(--nd-dur) var(--nd-ease),border-color var(--nd-dur) var(--nd-ease)}
 #nd-calc .ndc-toggle::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:var(--nd-radius-pill);background:var(--nd-maslina-100);transition:transform var(--nd-dur) var(--nd-ease),background var(--nd-dur) var(--nd-ease)}
@@ -58,7 +74,7 @@
 #nd-calc .ndc-tier--rec .ndc-tier-val{font-size:clamp(30px,7vw,42px)}
 #nd-calc .ndc-breakdown{margin-top:18px;background:var(--nd-surface-dark);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-lg);padding:18px 20px}
 #nd-calc .ndc-breakdown-h{font-size:13px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;color:var(--nd-maslina-100);margin-bottom:12px}
-#nd-calc .ndc-bd-item{display:flex;gap:10px;font-size:14px;line-height:1.5;color:var(--nd-body-on-dark);padding:6px 0}
+#nd-calc .ndc-bd-item{display:flex;gap:10px;font-size:14px;line-height:1.5;color:var(--nd-body-on-dark);padding:13px 0}
 #nd-calc .ndc-bd-item + .ndc-bd-item{border-top:1px solid var(--nd-border-on-dark)}
 #nd-calc .ndc-bd-plus{flex-shrink:0;font-weight:600;color:var(--nd-fluo);font-variant-numeric:tabular-nums}
 #nd-calc .ndc-bd-item strong{color:var(--nd-bela);font-weight:600}
@@ -76,7 +92,7 @@
       <div class="ndc-step">
         <div class="ndc-step-h"><span class="ndc-step-n">1</span><span class="ndc-step-t">Tip biznisa</span></div>
         <div class="ndc-step-sub">Glavni faktor - određuje baznu vrednost.</div>
-        <div class="ndc-selwrap"><select id="ndc-business"></select></div>
+        <div id="ndc-business"></div>
       </div>
 
       <div class="ndc-step">
@@ -204,7 +220,7 @@ var NDCALC = {
     bottomNote:   "Ovaj sajt praviš za par sati, a klijentu vredi {rec}. Ta razlika je razlog zašto ovo radiš."
   }
 };
-/* ═════════════════════════ KRAJ CONFIG-a — ispod ne diraj ═════════════════════════ */
+/* ═════════════════════════ KRAJ CONFIG-a - ispod ne diraj ═════════════════════════ */
 
 (function(){
   var root = document.getElementById("nd-calc");
@@ -214,6 +230,47 @@ var NDCALC = {
   function rnd(n){ return Math.round(n / roundTo) * roundTo; }
   function fmt(n){ return Math.round(n).toLocaleString("de-DE") + " €"; }
 
+  // ---- custom dropdown (dark, on-brand, sizes to content) ----
+  var allDD = [];
+  function closeAllDD(except){ allDD.forEach(function(d){ if(d!==except){ d.classList.remove("open"); var b=d.querySelector(".ndc-dd-btn"); if(b) b.setAttribute("aria-expanded","false"); } }); }
+  document.addEventListener("click", function(){ closeAllDD(null); });
+  function makeDropdown(options, currentId, onChange, fullWidth){
+    var dd = document.createElement("div");
+    dd.className = "ndc-dd" + (fullWidth ? " ndc-dd--full" : "");
+    dd.setAttribute("data-value", currentId);
+    var btn = document.createElement("button");
+    btn.type = "button"; btn.className = "ndc-dd-btn"; btn.setAttribute("aria-haspopup","listbox"); btn.setAttribute("aria-expanded","false");
+    var lbl = document.createElement("span"); lbl.className = "ndc-dd-label";
+    var cur = options.filter(function(x){ return x.id===currentId; })[0] || options[0];
+    lbl.textContent = cur ? cur.text : "";
+    btn.appendChild(lbl);
+    btn.insertAdjacentHTML("beforeend", '<svg class="ndc-dd-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5l4 4 4-4"></path></svg>');
+    var panel = document.createElement("div"); panel.className = "ndc-dd-panel"; panel.setAttribute("role","listbox");
+    options.forEach(function(o){
+      var op = document.createElement("div");
+      op.className = "ndc-dd-opt" + (o.id===currentId ? " sel" : "");
+      op.setAttribute("data-id", o.id); op.setAttribute("role","option");
+      op.textContent = o.text;
+      op.addEventListener("click", function(){
+        dd.setAttribute("data-value", o.id);
+        lbl.textContent = o.text;
+        [].slice.call(panel.children).forEach(function(x){ x.classList.toggle("sel", x.getAttribute("data-id")===o.id); });
+        closeAllDD(null);
+        onChange(o.id);
+      });
+      panel.appendChild(op);
+    });
+    btn.addEventListener("click", function(e){
+      e.stopPropagation();
+      var isOpen = dd.classList.contains("open");
+      closeAllDD(dd);
+      if(!isOpen){ dd.classList.add("open"); btn.setAttribute("aria-expanded","true"); }
+    });
+    dd.appendChild(btn); dd.appendChild(panel);
+    allDD.push(dd);
+    return dd;
+  }
+
   // state
   var state = { business: C.businesses[0].id, addons: {}, deadline: C.deadlines[0].id };
   C.addons.forEach(function(a){
@@ -221,12 +278,9 @@ var NDCALC = {
   });
 
   // ---- build inputs ----
-  var selBiz = document.getElementById("ndc-business");
-  selBiz.innerHTML = C.businesses.map(function(b){
-    return '<option value="'+b.id+'">'+b.label+' — '+fmt(b.base)+'</option>';
-  }).join("");
-  selBiz.value = state.business;
-  selBiz.addEventListener("change", function(){ state.business = selBiz.value; calc(); });
+  var bizMount = document.getElementById("ndc-business");
+  var bizOpts = C.businesses.map(function(b){ return { id:b.id, text:b.label+" - "+fmt(b.base) }; });
+  bizMount.appendChild(makeDropdown(bizOpts, state.business, function(id){ state.business = id; calc(); }, true));
 
   var addWrap = document.getElementById("ndc-addons");
   C.addons.forEach(function(a, i){
@@ -257,22 +311,13 @@ var NDCALC = {
       ctrl.appendChild(price);
       ctrl.appendChild(tog);
     } else {
-      var sw = document.createElement("div");
-      sw.className = "ndc-selwrap";
-      var sel = document.createElement("select");
-      sel.innerHTML = a.options.map(function(o){
-        var suffix = o.price > 0 ? "  (+"+fmt(o.price)+")" : "";
-        return '<option value="'+o.id+'">'+o.label+suffix+'</option>';
-      }).join("");
-      sel.value = state.addons[a.id];
-      sel.addEventListener("change", function(){
-        state.addons[a.id] = sel.value;
-        var op = a.options.filter(function(o){return o.id===sel.value;})[0];
+      var ddOpts = a.options.map(function(o){ return { id:o.id, text:o.label + (o.price>0 ? " (+"+fmt(o.price)+")" : "") }; });
+      ctrl.appendChild(makeDropdown(ddOpts, state.addons[a.id], function(id){
+        state.addons[a.id] = id;
+        var op = a.options.filter(function(o){ return o.id===id; })[0];
         row.classList.toggle("active", !!(op && op.price>0));
         calc();
-      });
-      sw.appendChild(sel);
-      ctrl.appendChild(sw);
+      }, false));
     }
 
     row.appendChild(main);
@@ -292,7 +337,7 @@ var NDCALC = {
     b.type = "button";
     b.className = "ndc-pill" + (d.id === state.deadline ? " on" : "");
     b.setAttribute("data-id", d.id);
-    b.innerHTML = d.label + '<small>×' + d.mult + '</small>';
+    b.innerHTML = d.label;
     b.addEventListener("click", function(){
       state.deadline = d.id;
       [].slice.call(dlWrap.children).forEach(function(x){ x.classList.toggle("on", x.getAttribute("data-id")===d.id); });
@@ -342,10 +387,10 @@ var NDCALC = {
     lines.forEach(function(l){
       var amt = (l.isBase ? "" : "+") + fmt(l.amount);
       var why = l.why ? " " + l.why : "";
-      bd += '<div class="ndc-bd-item"><span class="ndc-bd-plus">'+amt+'</span><span><strong>'+l.label+'</strong>'+(why?" — "+why.replace(/^ /,""):"")+'</span></div>';
+      bd += '<div class="ndc-bd-item"><span class="ndc-bd-plus">'+amt+'</span><span><strong>'+l.label+'</strong>'+(why?" - "+why.replace(/^ /,""):"")+'</span></div>';
     });
     if(dl.mult !== 1){
-      bd += '<div class="ndc-bd-item"><span class="ndc-bd-plus">×'+dl.mult+'</span><span><strong>'+C.copy.deadlineLabel+': '+dl.label+'</strong> — hitno vredi više</span></div>';
+      bd += '<div class="ndc-bd-item"><span class="ndc-bd-plus">×'+dl.mult+'</span><span><strong>'+C.copy.deadlineLabel+': '+dl.label+'</strong> - hitno vredi više</span></div>';
     }
     bd += '</div>';
 
