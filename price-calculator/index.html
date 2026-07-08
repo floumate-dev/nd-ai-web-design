@@ -3,6 +3,26 @@
      Full self-contained embed. Fontovi Raptor Text / Saol Standard su vec u Webflow projektu.
      ADMIN: menjaj SAMO config blok (NDCALC) na vrhu <script>-a. Ispod ne diraj.
      ============================================================ -->
+
+<!-- iClosed OFF samo na ovoj stranici (override site-wide widget iz Site Settings) -->
+<style>
+  iframe[src*="iclosed.io"],
+  [id*="iclosed" i],
+  [class*="iclosed" i],
+  [data-cta-widget] { display: none !important; }
+</style>
+<script>
+(function () {
+  function nuke() {
+    document.querySelectorAll('iframe[src*="iclosed.io"], [id*="iclosed" i], [class*="iclosed" i], [data-cta-widget]').forEach(function (el) { el.remove(); });
+  }
+  nuke();
+  var obs = new MutationObserver(nuke);
+  try { obs.observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+  setTimeout(function () { obs.disconnect(); }, 20000);
+})();
+</script>
+
 <div id="nd-calc">
 <style>
 html,body{margin:0;padding:0;background:#232421}
