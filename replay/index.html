@@ -4,6 +4,7 @@
      Fontovi Raptor Text / Saol Standard su vec u Webflow projektu.
      Countdown cilja 2026-07-12T00:00:00 (promeni u <script> na dnu).
      CTA "Pogledaj ponudu" vodi na Skool (https://www.skool.com/nauci-dizajn/about); override preko window.NDPitchUrl.
+     Video: YouTube-lite facade (thumbnail + klik = iframe, brzi load). ID/start na #nd-video (data-yt / data-start).
      ============================================================ -->
 
 <!-- iClosed OFF samo na ovoj stranici (override site-wide widget iz Site Settings) -->
@@ -52,17 +53,21 @@
 
   <section style="padding: 8px 24px 0px;">
     <div style="max-width: 880px; margin: 0px auto;">
-      <div style="position: relative; aspect-ratio: 16 / 9; border-radius: var(--nd-radius-xl); overflow: hidden; background: radial-gradient(120% 120% at 30% 20%, var(--nd-maslina-200) 0%, var(--nd-maslina-400) 70%); border: 1px solid var(--nd-border-on-dark);">
+      <div id="nd-video" data-yt="BeCWVT54Rtg" data-start="1097" role="button" tabindex="0" aria-label="Pusti webinar snimak" style="position: relative; aspect-ratio: 16 / 9; border-radius: var(--nd-radius-xl); overflow: hidden; background: var(--nd-maslina-400); border: 1px solid var(--nd-border-on-dark); cursor: pointer;">
+
+        <img src="https://i.ytimg.com/vi/BeCWVT54Rtg/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/BeCWVT54Rtg/hqdefault.jpg';" alt="Webinar snimak - AI dizajnira, ti zarađuješ" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; display: block;">
+
+        <div style="position: absolute; inset: 0px; background: rgba(35, 36, 33, 0.32);"></div>
 
         <div style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center;">
-          <div style="width: 92px; height: 92px; border-radius: 999px; background: var(--nd-fluo); display: flex; align-items: center; justify-content: center; box-shadow: rgba(0, 0, 0, 0.35) 0px 12px 40px; cursor: pointer;">
+          <div style="width: 92px; height: 92px; border-radius: 999px; background: var(--nd-fluo); display: flex; align-items: center; justify-content: center; box-shadow: rgba(0, 0, 0, 0.35) 0px 12px 40px;">
             <div style="width: 0px; height: 0px; border-style: solid; border-width: 16px 0px 16px 26px; border-color: transparent transparent transparent var(--nd-maslina-400); margin-left: 6px;"></div>
           </div>
         </div>
 
         <div style="position: absolute; left: 24px; bottom: 22px; display: flex; align-items: center; gap: 12px;">
-          <span style="display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); color: var(--nd-bela); font-size: 13px; font-weight: 600;"><span style="width: 8px; height: 8px; border-radius: 999px; background: var(--nd-fluo);"></span>Webinar snimak · 45 min</span>
-          <span style="color: var(--nd-body-on-dark); font-size: 13px; font-weight: 500;">sa Nikolom</span>
+          <span style="display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); color: var(--nd-bela); font-size: 13px; font-weight: 600;"><span style="width: 8px; height: 8px; border-radius: 999px; background: var(--nd-fluo);"></span>Webinar snimak · 45 min</span>
+          <span style="color: var(--nd-bela); font-size: 13px; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">sa Nikolom</span>
         </div>
       </div>
     </div>
@@ -170,4 +175,4 @@
     </div>
   </section></div></div>
 </div>
-<script>(function(){var r=document.getElementById('nd-replay');if(!r)return;var T=new Date('2026-07-12T00:00:00').getTime();var el={d:r.querySelector('[data-cd=d]'),h:r.querySelector('[data-cd=h]'),m:r.querySelector('[data-cd=m]'),s:r.querySelector('[data-cd=s]')};function p(n){return String(n).padStart(2,'0');}function tick(){var diff=T-Date.now();if(diff<0)diff=0;var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);if(el.d)el.d.textContent=p(d);if(el.h)el.h.textContent=p(h);if(el.m)el.m.textContent=p(m);if(el.s)el.s.textContent=p(s);}tick();setInterval(tick,1000);var NDPitchUrl=window.NDPitchUrl||'https://www.skool.com/nauci-dizajn/about';var cta=[].slice.call(r.querySelectorAll('button')).filter(function(b){return /Pogledaj ponudu/.test(b.textContent);})[0];if(cta)cta.addEventListener('click',function(){window.location.href=NDPitchUrl;});})();</script>
+<script>(function(){var r=document.getElementById('nd-replay');if(!r)return;var T=new Date('2026-07-12T00:00:00').getTime();var el={d:r.querySelector('[data-cd=d]'),h:r.querySelector('[data-cd=h]'),m:r.querySelector('[data-cd=m]'),s:r.querySelector('[data-cd=s]')};function p(n){return String(n).padStart(2,'0');}function tick(){var diff=T-Date.now();if(diff<0)diff=0;var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);if(el.d)el.d.textContent=p(d);if(el.h)el.h.textContent=p(h);if(el.m)el.m.textContent=p(m);if(el.s)el.s.textContent=p(s);}tick();setInterval(tick,1000);var NDPitchUrl=window.NDPitchUrl||'https://www.skool.com/nauci-dizajn/about';var cta=[].slice.call(r.querySelectorAll('button')).filter(function(b){return /Pogledaj ponudu/.test(b.textContent);})[0];if(cta)cta.addEventListener('click',function(){window.location.href=NDPitchUrl;});var vid=r.querySelector('#nd-video');if(vid){var played=false;function playVid(){if(played)return;played=true;var id=vid.getAttribute('data-yt');var st=vid.getAttribute('data-start');var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1'+(st?'&start='+st:'');f.title='Webinar snimak';f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','');f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';vid.innerHTML='';vid.appendChild(f);}vid.addEventListener('click',playVid);vid.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();playVid();}});}})();</script>
