@@ -61,12 +61,16 @@ html,body{margin:0;padding:0;background:#232421}
 #nd-calc .ndc-dd-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #nd-calc .ndc-dd-arrow{flex-shrink:0;width:14px;height:14px;color:var(--nd-fluo);transition:transform var(--nd-dur) var(--nd-ease)}
 #nd-calc .ndc-dd.open .ndc-dd-arrow{transform:rotate(180deg)}
-#nd-calc .ndc-dd-panel{position:absolute;top:calc(100% + 6px);right:0;min-width:100%;width:max-content;max-width:min(340px,82vw);z-index:40;background:var(--nd-maslina-300);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-md);padding:6px;box-shadow:0 14px 36px rgba(0,0,0,0.45);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity var(--nd-dur) var(--nd-ease),transform var(--nd-dur) var(--nd-ease),visibility var(--nd-dur)}
+#nd-calc .ndc-dd-panel{position:absolute;top:calc(100% + 6px);right:0;min-width:100%;width:max-content;max-width:min(340px,82vw);z-index:40;background:var(--nd-maslina-300);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-md);padding:6px;max-height:min(360px,60vh);overflow-y:auto;box-shadow:0 14px 36px rgba(0,0,0,0.45);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity var(--nd-dur) var(--nd-ease),transform var(--nd-dur) var(--nd-ease),visibility var(--nd-dur)}
 #nd-calc .ndc-dd--full .ndc-dd-panel{left:0;right:0;width:auto;max-width:none}
 #nd-calc .ndc-dd.open .ndc-dd-panel{opacity:1;visibility:visible;transform:translateY(0)}
 #nd-calc .ndc-dd-opt{padding:11px 13px;border-radius:6px;font-size:14px;line-height:1.35;color:var(--nd-body-on-dark);cursor:pointer;white-space:nowrap;transition:background var(--nd-dur) var(--nd-ease),color var(--nd-dur) var(--nd-ease)}
 #nd-calc .ndc-dd-opt:hover{background:var(--nd-maslina-200);color:var(--nd-bela)}
 #nd-calc .ndc-dd-opt.sel{color:var(--nd-fluo);font-weight:600}
+/* custom biznis input */
+#nd-calc .ndc-custom-input{width:100%;margin-top:12px;background:var(--nd-maslina-400);color:var(--nd-bela);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-md);padding:12px 14px;font-family:var(--nd-font-sans);font-size:15px;font-weight:500;line-height:1.2}
+#nd-calc .ndc-custom-input::placeholder{color:var(--nd-maslina-100)}
+#nd-calc .ndc-custom-input:focus{outline:none;border-color:var(--nd-fluo)}
 /* toggle switch */
 #nd-calc .ndc-toggle{position:relative;flex-shrink:0;width:46px;height:27px;border-radius:var(--nd-radius-pill);background:var(--nd-maslina-400);border:1px solid var(--nd-border-on-dark);cursor:pointer;transition:background var(--nd-dur) var(--nd-ease),border-color var(--nd-dur) var(--nd-ease)}
 #nd-calc .ndc-toggle::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:var(--nd-radius-pill);background:var(--nd-maslina-100);transition:transform var(--nd-dur) var(--nd-ease),background var(--nd-dur) var(--nd-ease)}
@@ -113,6 +117,7 @@ html,body{margin:0;padding:0;background:#232421}
         <div class="ndc-step-h"><span class="ndc-step-n">1</span><span class="ndc-step-t">Tip biznisa</span></div>
         <div class="ndc-step-sub">Glavni faktor - određuje baznu vrednost.</div>
         <div id="ndc-business"></div>
+        <input id="ndc-custom" class="ndc-custom-input" type="text" style="display:none" autocomplete="off" />
       </div>
 
       <div class="ndc-step">
@@ -144,16 +149,59 @@ var NDCALC = {
   premiumFactor: 1.15,     // Premium = Preporuceno × ovo
   roundTo: 10,             // zaokruzi cene na najblizih X €
 
-  // Korak 1 - bazne cene po tipu biznisa
+  // Korak 1 - bazne cene po tipu biznisa (proporcionalno: medicina/pravo/turizam vise, hrana/trgovina nize)
   businesses: [
-    { id:"stomatolog", label:"Stomatolog",              base:1100 },
-    { id:"klinika",    label:"Privatna klinika",         base:1200 },
-    { id:"glamping",   label:"Glamping",                 base:1150 },
-    { id:"restoran",   label:"Restoran",                 base:950  },
-    { id:"salon",      label:"Salon (frizerski/kozmetički)", base:900 },
-    { id:"autoskola",  label:"Auto škola",               base:850  },
-    { id:"pekara",     label:"Pekara / mali lokal",      base:700  }
+    { id:"stomatolog",   label:"Stomatolog",                    base:1100 },
+    { id:"klinika",      label:"Privatna klinika",              base:1200 },
+    { id:"estetska",     label:"Estetska / kozmetička klinika", base:1200 },
+    { id:"veterinar",    label:"Veterinarska ambulanta",        base:1050 },
+    { id:"apoteka",      label:"Apoteka",                       base:950  },
+    { id:"optika",       label:"Optika",                        base:950  },
+    { id:"advokat",      label:"Advokatska kancelarija",        base:1150 },
+    { id:"racunovodstvo",label:"Računovodstvena agencija",      base:1100 },
+    { id:"arhitekta",    label:"Arhitektonski biro",            base:1150 },
+    { id:"hotel",        label:"Hotel / hostel",                base:1200 },
+    { id:"glamping",     label:"Glamping",                      base:1150 },
+    { id:"apartmani",    label:"Apartmani / smeštaj",           base:1050 },
+    { id:"turagencija",  label:"Turistička agencija",           base:1000 },
+    { id:"restoran",     label:"Restoran",                      base:950  },
+    { id:"kafic",        label:"Kafić / bar",                   base:800  },
+    { id:"picerija",     label:"Picerija / fast food",          base:850  },
+    { id:"pekara",       label:"Pekara / poslastičarnica",      base:750  },
+    { id:"frizer",       label:"Frizerski salon",               base:850  },
+    { id:"kozmeticki",   label:"Kozmetički salon",              base:900  },
+    { id:"spa",          label:"Spa / wellness",                base:1000 },
+    { id:"teretana",     label:"Teretana / fitnes",             base:950  },
+    { id:"joga",         label:"Yoga / pilates studio",         base:900  },
+    { id:"skolajezika",  label:"Škola jezika / kurs",           base:950  },
+    { id:"vrtic",        label:"Privatni vrtić",                base:1000 },
+    { id:"autoskola",    label:"Auto škola",                    base:850  },
+    { id:"autoservis",   label:"Auto servis / mehaničar",       base:900  },
+    { id:"fotograf",     label:"Fotograf / studio",             base:900  },
+    { id:"zanat",        label:"Zanatska radnja (stolar...)",   base:900  },
+    { id:"majstor",      label:"Majstor (vodoinstalater...)",   base:800  },
+    { id:"prodavnica",   label:"Prodavnica / butik",            base:800  }
   ],
+
+  // Korak 1b - custom biznis: korisnik upisuje svoj tip, cena se auto-generise u odnosu na gornje.
+  //   rules: ako upisani naziv sadrzi neku "words" rec -> uzima tu baznu cenu (prvo poklapanje pobedjuje).
+  //   ako nista ne prepozna -> PROSEK svih gornjih cena. (matching ignorise č/š/ž/đ)
+  custom: {
+    enabled: true,
+    optionLabel: "Drugo - moj biznis nije na listi",
+    placeholder: "Upiši svoj tip biznisa (npr. Zubna ordinacija)",
+    emptyLabel:  "Tvoj biznis",
+    rules: [
+      { base:1200, words:["klinik","ordinacij","doktor","lekar","medicin","stomatolog","zub","fizio","rehabilit","dermatolog","ginekolog","estetsk","poliklinik","laborator"] },
+      { base:1150, words:["advokat","notar","pravnik","racunovod","knjigovod","konsalting","arhitekt","projekt","inzenjer","geodet"] },
+      { base:1100, words:["hotel","hostel","apartman","smestaj","glamping","vila","resort","etno","turistick","rentacar","rent a car"] },
+      { base:1000, words:["vrtic","skola","kurs","obuka","edukacij","jezik","instrukcij","casovi","akademij"] },
+      { base:950,  words:["restoran","catering","picerij","fast food","teretana","fitnes","yoga","joga","pilates","spa","wellness","apotek","optik"] },
+      { base:900,  words:["salon","frizer","kozmetik","masaz","estetik","nokti","tetovaz","sminka","depilacij","brijac","fotograf","video","zanat","stolar","tapetar"] },
+      { base:850,  words:["servis","majstor","auto","mehanic","vulkanizer","perionic","vodoinstalater","elektric","limar","moler","gradjevin"] },
+      { base:800,  words:["kafic","kafan","bar","pab","pekar","poslasticar","prodavnic","radnj","butik","shop","market","trafik","cvecar","pet","kiosk"] }
+    ]
+  },
 
   // Korak 2 - dodaci. type:"toggle" (da/ne) ili type:"select" (padajuci meni).
   // "why" = recenica koju pocetnik moze da procita klijentu.
@@ -250,6 +298,21 @@ var NDCALC = {
   function rnd(n){ return Math.round(n / roundTo) * roundTo; }
   function fmt(n){ return Math.round(n).toLocaleString("de-DE") + " €"; }
 
+  // ---- custom biznis (upis + auto-cena u odnosu na ostale) ----
+  var CUSTOM_ID = "__custom__";
+  function norm(s){ return (s||"").toLowerCase().replace(/[čć]/g,"c").replace(/š/g,"s").replace(/ž/g,"z").replace(/đ/g,"dj"); }
+  function avgBase(){ var s=0; C.businesses.forEach(function(b){ s+=b.base; }); return rnd(s / C.businesses.length); }
+  function customBase(name){
+    var n = norm(name).trim();
+    if(n && C.custom && C.custom.rules){
+      for(var i=0;i<C.custom.rules.length;i++){
+        var r=C.custom.rules[i];
+        for(var j=0;j<r.words.length;j++){ if(n.indexOf(r.words[j]) >= 0) return r.base; }
+      }
+    }
+    return avgBase();
+  }
+
   // ---- custom dropdown (dark, on-brand, sizes to content) ----
   var allDD = [];
   function closeAllDD(except){ allDD.forEach(function(d){ if(d!==except){ d.classList.remove("open"); var b=d.querySelector(".ndc-dd-btn"); if(b) b.setAttribute("aria-expanded","false"); } }); }
@@ -292,15 +355,25 @@ var NDCALC = {
   }
 
   // state
-  var state = { business: C.businesses[0].id, addons: {}, deadline: C.deadlines[0].id };
+  var state = { business: C.businesses[0].id, customName: "", addons: {}, deadline: C.deadlines[0].id };
   C.addons.forEach(function(a){
     state.addons[a.id] = (a.type === "toggle") ? false : (a.default != null ? a.default : a.options[0].id);
   });
 
   // ---- build inputs ----
   var bizMount = document.getElementById("ndc-business");
+  var customInput = document.getElementById("ndc-custom");
+  if(customInput && C.custom){ customInput.placeholder = C.custom.placeholder || "Upiši svoj tip biznisa"; }
+  function toggleCustom(show){ if(customInput){ customInput.style.display = show ? "block" : "none"; } }
   var bizOpts = C.businesses.map(function(b){ return { id:b.id, text:b.label+" - "+fmt(b.base) }; });
-  bizMount.appendChild(makeDropdown(bizOpts, state.business, function(id){ state.business = id; calc(); }, true));
+  if(C.custom && C.custom.enabled){ bizOpts.push({ id:CUSTOM_ID, text:(C.custom.optionLabel || "Drugo - upiši svoj biznis") }); }
+  bizMount.appendChild(makeDropdown(bizOpts, state.business, function(id){
+    state.business = id;
+    toggleCustom(id === CUSTOM_ID);
+    if(id === CUSTOM_ID && customInput){ setTimeout(function(){ customInput.focus(); }, 0); }
+    calc();
+  }, true));
+  if(customInput){ customInput.addEventListener("input", function(){ state.customName = customInput.value; calc(); }); }
 
   var addWrap = document.getElementById("ndc-addons");
   C.addons.forEach(function(a, i){
@@ -369,10 +442,17 @@ var NDCALC = {
   // ---- calc + render result ----
   var out = document.getElementById("ndc-result");
   function calc(){
-    var biz = C.businesses.filter(function(b){return b.id===state.business;})[0];
-    var base = biz.base;
+    var base, bizLabel;
+    if(state.business === CUSTOM_ID){
+      var nm = (state.customName||"").trim();
+      bizLabel = nm || (C.custom && C.custom.emptyLabel) || "Tvoj biznis";
+      base = customBase(nm);
+    } else {
+      var biz = C.businesses.filter(function(b){return b.id===state.business;})[0];
+      base = biz.base; bizLabel = biz.label;
+    }
     var lines = [];
-    lines.push({ label: C.copy.baseLabel + " ("+biz.label+")", amount: base, why: "", isBase:true });
+    lines.push({ label: C.copy.baseLabel + " ("+bizLabel+")", amount: base, why: "", isBase:true });
 
     var addonsTotal = 0;
     C.addons.forEach(function(a){
