@@ -401,7 +401,7 @@ var NDCALC = {
     btn.addEventListener("click", function(e){
       e.stopPropagation();
       var isOpen = dd.classList.contains("open");
-      closeAllDD(dd);
+      closeAllDD(null);
       if(!isOpen){
         dd.classList.add("open"); btn.setAttribute("aria-expanded","true");
         if(search){ search.value = ""; optEls.forEach(function(el){ el.style.display = ""; }); setTimeout(function(){ search.focus(); }, 0); }
