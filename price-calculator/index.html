@@ -114,6 +114,18 @@ html,body{margin:0;padding:0;background:#232421}
 #nd-calc .ndc-bd-plus{flex-shrink:0;font-weight:600;color:var(--nd-fluo);font-variant-numeric:tabular-nums}
 #nd-calc .ndc-bd-item strong{color:var(--nd-bela);font-weight:600}
 #nd-calc .ndc-bottom{margin-top:18px;padding:18px 20px;border-radius:var(--nd-radius-lg);background:var(--nd-fluo);color:var(--nd-maslina-400);font-weight:600;font-size:15px;line-height:1.5}
+/* --- mobilni layout dodataka: select dropdown full-width; kod toggle-a cena iznad toggle-a, u ravni sa naslovom --- */
+@media(max-width:600px){
+  #nd-calc .ndc-addon--select{flex-direction:column;align-items:stretch;gap:10px}
+  #nd-calc .ndc-addon--select .ndc-addon-main{flex:1 1 auto;min-width:0}
+  #nd-calc .ndc-addon--select .ndc-addon-ctrl{flex:1 1 auto;min-width:0}
+  #nd-calc .ndc-addon--select .ndc-dd{display:block;width:100%}
+  #nd-calc .ndc-addon--select .ndc-dd-btn{width:100%;justify-content:space-between}
+  #nd-calc .ndc-addon--select .ndc-dd-panel{left:0;right:0;width:auto;max-width:none}
+  #nd-calc .ndc-addon--toggle{align-items:flex-start}
+  #nd-calc .ndc-addon--toggle .ndc-addon-main{flex:1 1 auto;min-width:0}
+  #nd-calc .ndc-addon--toggle .ndc-addon-ctrl{flex:0 0 auto;min-width:0;flex-direction:column;align-items:flex-end;gap:8px}
+}
 </style>
 
 <div class="ndc-wrap">
@@ -442,6 +454,7 @@ var NDCALC = {
     ctrl.className = "ndc-addon-ctrl";
 
     if(a.type === "toggle"){
+      row.classList.add("ndc-addon--toggle");
       var price = document.createElement("span");
       price.className = "ndc-addon-price";
       price.textContent = "+" + fmt(a.price);
@@ -457,6 +470,7 @@ var NDCALC = {
       ctrl.appendChild(price);
       ctrl.appendChild(tog);
     } else {
+      row.classList.add("ndc-addon--select");
       var ddOpts = a.options.map(function(o){ return { id:o.id, text:o.label + (o.price>0 ? " (+"+fmt(o.price)+")" : "") }; });
       ctrl.appendChild(makeDropdown(ddOpts, state.addons[a.id], function(id){
         state.addons[a.id] = id;
