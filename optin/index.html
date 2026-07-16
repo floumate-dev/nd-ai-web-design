@@ -1,0 +1,220 @@
+<!-- ============================================================
+     Nauci Dizajn - OPTIN / PRIJAVA forma (Webflow Embed Code)
+     Full self-contained embed. Fontovi Raptor Text / Saol Standard su vec u Webflow projektu.
+     Polja: Ime i prezime, Email, Broj telefona.
+     ADMIN: menjaj SAMO config blok (NDOPTIN) na vrhu <script>-a. Ispod ne diraj.
+     ============================================================ -->
+
+<!-- iClosed OFF samo na ovoj stranici (override site-wide widget iz Site Settings) -->
+<style>
+  iframe[src*="iclosed.io"],
+  [id*="iclosed" i],
+  [class*="iclosed" i],
+  [data-cta-widget] { display: none !important; }
+  html, body { margin: 0; padding: 0; background: #232421; }
+</style>
+<script>
+(function () {
+  function nuke() {
+    document.querySelectorAll('iframe[src*="iclosed.io"], [id*="iclosed" i], [class*="iclosed" i], [data-cta-widget]').forEach(function (el) { el.remove(); });
+  }
+  nuke();
+  var obs = new MutationObserver(nuke);
+  try { obs.observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+  setTimeout(function () { obs.disconnect(); }, 20000);
+})();
+</script>
+
+<div id="nd-optin">
+<style>
+#nd-optin{--nd-bela:#FFFFFF;--nd-body-on-dark:#D3D3D3;--nd-border-on-dark:rgba(255,255,255,0.14);--nd-dur:180ms;--nd-ease:cubic-bezier(0.22,1,0.36,1);--nd-fluo:#DBFF00;--nd-font-sans:"Raptor Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--nd-font-serif:"Saol Standard",Georgia,"Times New Roman",serif;--nd-greska:#FF6B5A;--nd-maslina-100:#797D73;--nd-maslina-200:#3D403C;--nd-maslina-300:#313330;--nd-maslina-400:#232421;--nd-on-accent:#232421;--nd-radius-lg:12px;--nd-radius-md:8px;--nd-radius-pill:999px;--nd-radius-xl:24px;--nd-surface-dark:#232421;margin:0;color:var(--nd-bela);font-family:var(--nd-font-sans);line-height:1.4;background:var(--nd-surface-dark)}
+#nd-optin *,#nd-optin *::before,#nd-optin *::after{box-sizing:border-box}
+#nd-optin h1,#nd-optin h2,#nd-optin p{margin:0}
+#nd-optin .ndo-wrap{max-width:560px;margin:0 auto;padding:clamp(40px,8vw,72px) 24px clamp(56px,10vw,88px)}
+/* ---- heading ---- */
+#nd-optin .ndo-head{text-align:center;margin-bottom:clamp(28px,5vw,36px)}
+#nd-optin .ndo-eyebrow{font-weight:600;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:var(--nd-maslina-100)}
+#nd-optin .ndo-h1{margin-top:14px;font-family:var(--nd-font-sans);font-weight:500;font-size:clamp(30px,7vw,46px);line-height:1.08;letter-spacing:-0.03em;color:var(--nd-bela)}
+#nd-optin .ndo-h1 em{font-family:var(--nd-font-serif);font-style:italic;color:var(--nd-fluo)}
+#nd-optin .ndo-intro{margin:16px auto 0;max-width:440px;font-size:clamp(15px,3.6vw,17px);line-height:1.55;color:var(--nd-body-on-dark)}
+/* ---- card ---- */
+#nd-optin .ndo-card{background:var(--nd-maslina-300);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-xl);padding:clamp(22px,5vw,32px)}
+/* ---- fields ---- */
+#nd-optin .ndo-field{margin-bottom:18px}
+#nd-optin .ndo-label{display:block;margin-bottom:8px;font-size:14px;font-weight:600;letter-spacing:-0.01em;color:var(--nd-bela)}
+#nd-optin .ndo-input{width:100%;background:var(--nd-maslina-400);color:var(--nd-bela);border:1px solid var(--nd-border-on-dark);border-radius:var(--nd-radius-md);padding:14px;font-family:var(--nd-font-sans);font-size:15px;font-weight:500;line-height:1.3;transition:border-color var(--nd-dur) var(--nd-ease)}
+#nd-optin .ndo-input::placeholder{color:var(--nd-maslina-100);font-weight:400}
+#nd-optin .ndo-input:hover{border-color:var(--nd-maslina-100)}
+#nd-optin .ndo-input:focus{outline:none;border-color:var(--nd-fluo)}
+#nd-optin .ndo-field.is-invalid .ndo-input{border-color:var(--nd-greska)}
+#nd-optin .ndo-msg{display:none;margin-top:7px;font-size:13px;font-weight:500;color:var(--nd-greska)}
+#nd-optin .ndo-field.is-invalid .ndo-msg{display:block}
+/* ---- button ---- */
+#nd-optin .ndo-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:24px;padding:19px 28px;border:1px solid transparent;border-radius:var(--nd-radius-md);background:var(--nd-fluo);color:var(--nd-on-accent);font-family:var(--nd-font-sans);font-weight:600;font-size:17px;line-height:24px;letter-spacing:-0.01em;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;transition:transform var(--nd-dur) var(--nd-ease),opacity var(--nd-dur) var(--nd-ease)}
+#nd-optin .ndo-btn:hover{transform:translateY(-1px)}
+#nd-optin .ndo-btn:active{transform:translateY(0)}
+#nd-optin .ndo-btn:disabled{opacity:0.55;cursor:not-allowed;transform:none}
+#nd-optin .ndo-fine{margin-top:16px;font-size:13px;line-height:19px;text-align:center;color:var(--nd-maslina-100)}
+/* ---- form error (submit fail) ---- */
+#nd-optin .ndo-formerr{display:none;margin-top:16px;padding:12px 14px;border:1px solid var(--nd-greska);border-radius:var(--nd-radius-md);background:rgba(255,107,90,0.08);font-size:14px;color:var(--nd-greska)}
+#nd-optin .ndo-formerr.is-on{display:block}
+/* ---- success ---- */
+#nd-optin .ndo-ok{display:none;text-align:center;padding:clamp(8px,3vw,16px) 0}
+#nd-optin .ndo-ok.is-on{display:block}
+#nd-optin .ndo-ok-ic{width:64px;height:64px;margin:0 auto 20px;border-radius:var(--nd-radius-pill);background:var(--nd-fluo);display:flex;align-items:center;justify-content:center}
+#nd-optin .ndo-ok-ic svg{display:block;width:28px;height:28px;stroke:var(--nd-maslina-400)}
+#nd-optin .ndo-ok-t{font-weight:500;font-size:clamp(24px,5.5vw,30px);line-height:1.15;letter-spacing:-0.02em;color:var(--nd-bela)}
+#nd-optin .ndo-ok-p{margin:12px auto 0;max-width:380px;font-size:15px;line-height:23px;color:var(--nd-body-on-dark)}
+/* ---- mobile ---- */
+@media(max-width:600px){
+  #nd-optin .ndo-btn{font-size:16px;padding:17px 22px}
+}
+</style>
+
+<div class="ndo-wrap">
+
+  <div class="ndo-head">
+    <div class="ndo-eyebrow">Prijava</div>
+    <h1 class="ndo-h1">Rezerviši svoje <em>mesto</em></h1>
+    <p class="ndo-intro">Ostavi podatke i javljamo ti se sa svim detaljima. Bez spama - samo ono što ti treba.</p>
+  </div>
+
+  <div class="ndo-card">
+
+    <form class="ndo-form" novalidate>
+
+      <div class="ndo-field" data-field="ime">
+        <label class="ndo-label" for="ndo-ime">Ime i prezime</label>
+        <input class="ndo-input" id="ndo-ime" name="ime" type="text" autocomplete="name" placeholder="Petar Petrović">
+        <div class="ndo-msg" data-msg>Unesi ime i prezime.</div>
+      </div>
+
+      <div class="ndo-field" data-field="email">
+        <label class="ndo-label" for="ndo-email">Email</label>
+        <input class="ndo-input" id="ndo-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="petar@primer.com">
+        <div class="ndo-msg" data-msg>Unesi ispravnu email adresu.</div>
+      </div>
+
+      <div class="ndo-field" data-field="telefon">
+        <label class="ndo-label" for="ndo-telefon">Broj telefona</label>
+        <input class="ndo-input" id="ndo-telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel" placeholder="+381 60 123 4567">
+        <div class="ndo-msg" data-msg>Unesi ispravan broj telefona.</div>
+      </div>
+
+      <button class="ndo-btn" type="submit" data-submit>Prijavi se&nbsp;&nbsp;→</button>
+
+      <div class="ndo-formerr" data-formerr></div>
+
+      <p class="ndo-fine">Podatke koristimo samo za kontakt u vezi sa prijavom.</p>
+
+    </form>
+
+    <div class="ndo-ok" data-ok>
+      <div class="ndo-ok-ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5.5 5.5L20 7"/></svg>
+      </div>
+      <div class="ndo-ok-t" data-ok-t>Prijava primljena</div>
+      <p class="ndo-ok-p" data-ok-p>Hvala! Javljamo ti se na email u najkraćem roku.</p>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<script>
+(function () {
+
+  /* ====== CONFIG (menjaj samo ovo) ====== */
+  var NDOPTIN = {
+    endpoint: '',                 // POST URL (JSON). Prazno = demo rezim (bez slanja).
+    redirectUrl: '',              // Prazno = prikazi success poruku. Inace redirect posle uspeha.
+    buttonText: 'Prijavi se  →',
+    buttonSending: 'Šaljem...',
+    successTitle: 'Prijava primljena',
+    successText: 'Hvala! Javljamo ti se na email u najkraćem roku.',
+    errorText: 'Slanje nije uspelo. Pokušaj ponovo za koji trenutak.'
+  };
+  /* ====== KRAJ CONFIG-a - ispod ne diraj ====== */
+
+  var root = document.getElementById('nd-optin');
+  if (!root) return;
+
+  var form    = root.querySelector('.ndo-form');
+  var okBox   = root.querySelector('[data-ok]');
+  var btn     = root.querySelector('[data-submit]');
+  var formErr = root.querySelector('[data-formerr]');
+
+  var RULES = {
+    ime: function (v) { return v.trim().length >= 3 && v.trim().indexOf(' ') > 0; },
+    email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); },
+    telefon: function (v) { return v.replace(/[^\d]/g, '').length >= 6; }
+  };
+
+  function fieldOf(name) { return root.querySelector('[data-field="' + name + '"]'); }
+  function inputOf(name) { return form.elements[name]; }
+
+  function check(name) {
+    var wrap = fieldOf(name);
+    var ok = RULES[name](inputOf(name).value);
+    wrap.classList.toggle('is-invalid', !ok);
+    return ok;
+  }
+
+  // Validacija na blur; posle prve greske i na svaki unos.
+  Object.keys(RULES).forEach(function (name) {
+    var el = inputOf(name);
+    el.addEventListener('blur', function () { check(name); });
+    el.addEventListener('input', function () {
+      if (fieldOf(name).classList.contains('is-invalid')) check(name);
+    });
+  });
+
+  function showErr(msg) {
+    formErr.textContent = msg;
+    formErr.classList.add('is-on');
+  }
+
+  function succeed() {
+    if (NDOPTIN.redirectUrl) { window.location.href = NDOPTIN.redirectUrl; return; }
+    root.querySelector('[data-ok-t]').textContent = NDOPTIN.successTitle;
+    root.querySelector('[data-ok-p]').textContent = NDOPTIN.successText;
+    form.style.display = 'none';
+    okBox.classList.add('is-on');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    formErr.classList.remove('is-on');
+
+    var names = Object.keys(RULES);
+    var bad = names.filter(function (n) { return !check(n); });
+    if (bad.length) { inputOf(bad[0]).focus(); return; }
+
+    var data = {
+      ime: inputOf('ime').value.trim(),
+      email: inputOf('email').value.trim(),
+      telefon: inputOf('telefon').value.trim()
+    };
+
+    if (!NDOPTIN.endpoint) { succeed(); return; }   // demo rezim
+
+    btn.disabled = true;
+    btn.textContent = NDOPTIN.buttonSending;
+
+    fetch(NDOPTIN.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      succeed();
+    }).catch(function () {
+      showErr(NDOPTIN.errorText);
+      btn.disabled = false;
+      btn.textContent = NDOPTIN.buttonText;
+    });
+  });
+
+})();
+</script>
