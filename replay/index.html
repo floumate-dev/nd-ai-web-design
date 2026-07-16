@@ -2,7 +2,7 @@
      Nauci Dizajn — REPLAY embed (Webflow Embed Code)
      Page: /ai-dizajnira-ti-zaradjujes-webinar-replay
      Fontovi Raptor Text / Saol Standard su vec u Webflow projektu.
-     Countdown cilja 2026-07-12T00:00:00 (promeni u <script> na dnu).
+     Countdown cilja 2026-08-02T00:00:00 = kraj 01.08. (webinar 30.07 + 3 dana). Menja se u skripti na dnu.
      CTA "Pogledaj ponudu" vodi na Skool (https://www.skool.com/nauci-dizajn/about); override preko window.NDPitchUrl.
      Video: YouTube-lite facade (thumbnail + klik = iframe, brzi load). ID/start na #nd-video (data-yt / data-start).
      ============================================================ -->
@@ -100,7 +100,7 @@
               <div style="margin-top: 6px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nd-body-on-dark);">sek</div>
             </div>
           </div>
-          <div style="margin-top: 16px; font-size: 14px; color: var(--nd-body-on-dark);">Dostupan do <strong style="color: var(--nd-bela); font-weight: 600;">12.07. u ponoć</strong> - posle toga nestaje.</div>
+          <div style="margin-top: 16px; font-size: 14px; color: var(--nd-body-on-dark);">Dostupan do <strong style="color: var(--nd-bela); font-weight: 600;">01.08. u 23:59</strong> - posle toga nestaje.</div>
         </div>
       </div>
     </div>
@@ -175,4 +175,4 @@
     </div>
   </section></div></div>
 </div>
-<script>(function(){var r=document.getElementById('nd-replay');if(!r)return;var T=new Date('2026-07-12T00:00:00').getTime();var el={d:r.querySelector('[data-cd=d]'),h:r.querySelector('[data-cd=h]'),m:r.querySelector('[data-cd=m]'),s:r.querySelector('[data-cd=s]')};function p(n){return String(n).padStart(2,'0');}function tick(){var diff=T-Date.now();if(diff<0)diff=0;var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);if(el.d)el.d.textContent=p(d);if(el.h)el.h.textContent=p(h);if(el.m)el.m.textContent=p(m);if(el.s)el.s.textContent=p(s);}tick();setInterval(tick,1000);var NDPitchUrl=window.NDPitchUrl||'https://www.skool.com/nauci-dizajn/about';var cta=[].slice.call(r.querySelectorAll('button')).filter(function(b){return /Pogledaj ponudu/.test(b.textContent);})[0];if(cta)cta.addEventListener('click',function(){window.location.href=NDPitchUrl;});var vid=r.querySelector('#nd-video');if(vid){var played=false;function playVid(){if(played)return;played=true;var id=vid.getAttribute('data-yt');var st=vid.getAttribute('data-start');var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1'+(st?'&start='+st:'');f.title='Webinar snimak';f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','');f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';vid.innerHTML='';vid.appendChild(f);}vid.addEventListener('click',playVid);vid.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();playVid();}});}})();</script>
+<script>(function(){var r=document.getElementById('nd-replay');if(!r)return;var T=new Date('2026-08-02T00:00:00').getTime();var el={d:r.querySelector('[data-cd=d]'),h:r.querySelector('[data-cd=h]'),m:r.querySelector('[data-cd=m]'),s:r.querySelector('[data-cd=s]')};function p(n){return String(n).padStart(2,'0');}function tick(){var diff=T-Date.now();if(diff<0)diff=0;var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);if(el.d)el.d.textContent=p(d);if(el.h)el.h.textContent=p(h);if(el.m)el.m.textContent=p(m);if(el.s)el.s.textContent=p(s);}tick();setInterval(tick,1000);var NDPitchUrl=window.NDPitchUrl||'https://www.skool.com/nauci-dizajn/about';var cta=[].slice.call(r.querySelectorAll('button')).filter(function(b){return /Pogledaj ponudu/.test(b.textContent);})[0];if(cta)cta.addEventListener('click',function(){window.location.href=NDPitchUrl;});var vid=r.querySelector('#nd-video');if(vid){var played=false;function playVid(){if(played)return;played=true;var id=vid.getAttribute('data-yt');var st=vid.getAttribute('data-start');var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1'+(st?'&start='+st:'');f.title='Webinar snimak';f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','');f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';vid.innerHTML='';vid.appendChild(f);}vid.addEventListener('click',playVid);vid.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();playVid();}});}})();</script>
